@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PJOK: Rhythmic Master</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#0f172a', /* Navy Gelap */
+                        accent: '#f97316', /* Oranye Sporty */
+                        action: '#3b82f6', /* Biru Terang */
+                        success: '#10b981',
+                        danger: '#ef4444',
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        head: ['Teko', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        
+        .active-mission { border-left: 5px solid #f97316; background: #e2e8f0; color: #0f172a; }
+        .inactive-mission { border-left: 5px solid transparent; opacity: 0.7; }
+        
+        .task-checkbox:checked + div { background-color: #dcfce7; border-color: #22c55e; }
+        .task-checkbox:checked + div span { color: #15803d; text-decoration: none; font-weight: bold; }
+        .task-checkbox:checked + div .icon-check { opacity: 1; transform: scale(1); }
+    </style>
+</head>
+<body class="bg-slate-900 font-sans text-slate-200 min-h-screen flex justify-center">
+
+    <div class="w-full max-w-lg bg-slate-50 text-slate-800 shadow-2xl min-h-screen relative flex flex-col">
+
+        <!-- HEADER -->
+        <header class="bg-brand text-white p-6 rounded-b-[30px] shadow-lg z-10 relative overflow-hidden shrink-0">
+            <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fas fa-running text-9xl text-white"></i></div>
+            <div class="relative z-10">
+                <span class="bg-accent text-white px-3 py-0.5 rounded text-xs font-bold tracking-widest uppercase shadow-sm">Modul KD 3.7 - Fase E</span>
+                <h1 class="font-head text-4xl font-bold uppercase leading-none mt-2 tracking-wide">Rhythmic <span class="text-accent">Master</span></h1>
+                <p class="text-slate-400 text-sm">Video Guided Learning</p>
+                
+                <div class="flex items-center gap-3 mt-4 pt-3 border-t border-slate-700/50">
+                    <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-accent text-lg shadow-inner"><i class="fas fa-user-tie"></i></div>
+                    <div>
+                        <p class="text-[10px] text-slate-400 uppercase tracking-wider">Coach</p>
+                        <p class="font-bold text-white text-lg leading-none">Pak Nanda</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- HALAMAN LOGIN -->
+        <section id="login-screen" class="flex-grow p-8 flex flex-col justify-center fade-in bg-slate-50">
+            <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand to-accent"></div>
+                <h2 class="font-head text-4xl font-bold text-brand uppercase mb-2">Login Atlet</h2>
+                <p class="text-sm text-slate-500 mb-6">Siapkan diri untuk materi teknik & kombinasi.</p>
+                <form id="login-form" class="space-y-4">
+                    <input type="text" id="nama" class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:border-accent font-bold outline-none" placeholder="Nama Lengkap" required>
+                    <div class="grid grid-cols-2 gap-3">
+                        <select id="kelas" class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 font-bold outline-none"><option>X TKJ</option><option>X TKR</option><option>X TBSM</option></select>
+                        <input type="number" id="absen" class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 font-bold outline-none" placeholder="No. Absen" required>
+                    </div>
+                    <button type="submit" class="w-full bg-brand text-white font-head text-2xl py-3 rounded-xl hover:bg-slate-800 transition-all shadow-lg mt-4 flex items-center justify-center gap-2">
+                        Masuk Kelas <i class="fas fa-arrow-right text-accent"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- DASHBOARD UTAMA -->
+        <main id="main-content" class="hidden flex-col flex-grow bg-slate-100 relative h-screen">
+            
+            <!-- Tab Navigasi -->
+            <div class="sticky top-0 bg-white z-30 px-4 py-3 shadow-md border-b border-slate-200 flex gap-2 overflow-x-auto shrink-0 no-scrollbar">
+                <button onclick="loadMission(1)" id="btn-1" class="flex-1 min-w-[100px] py-2 px-3 rounded-lg text-left transition-all active-mission group">
+                    <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider group-hover:text-accent">Tab 1</span>
+                    <span class="font-head text-xl font-bold leading-none text-brand">TEKNIK DASAR</span>
+                </button>
+                <button onclick="loadMission(2)" id="btn-2" class="flex-1 min-w-[100px] py-2 px-3 rounded-lg text-left transition-all inactive-mission group">
+                    <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider group-hover:text-accent">Tab 2</span>
+                    <span class="font-head text-xl font-bold leading-none text-brand">KOMBINASI</span>
+                </button>
+                <button onclick="loadMission(3)" id="btn-3" class="flex-1 min-w-[100px] py-2 px-3 rounded-lg text-left transition-all inactive-mission group">
+                    <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider group-hover:text-accent">Tab 3</span>
+                    <span class="font-head text-xl font-bold leading-none text-brand">PROYEK</span>
+                </button>
+            </div>
+
+            <!-- Area Konten -->
+            <div class="p-4 pb-32 space-y-6 overflow-y-auto grow fade-in scroll-smooth" id="scroll-container">
+                
+                <!-- 1. Header Konten -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-4 flex justify-between items-start">
+                        <h2 id="mission-title" class="font-head text-3xl font-bold text-brand uppercase leading-none">JUDUL</h2>
+                        <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-[10px] font-bold border border-slate-200">KD 3.7</span>
+                    </div>
+                    
+                    <!-- Area Video -->
+                    <div class="aspect-video bg-black relative group" id="media-container">
+                        <!-- Iframe injected by JS -->
+                    </div>
+                    
+                    <div class="p-4 bg-slate-50 border-t border-slate-100">
+                        <p id="mission-desc" class="text-sm text-slate-600 leading-relaxed font-medium">Deskripsi...</p>
+                    </div>
+                </div>
+
+                <!-- 2. TEORI / PEMBAHASAN MATERI -->
+                <div class="bg-brand text-white p-5 rounded-2xl shadow-lg relative overflow-hidden">
+                    <div class="flex items-center gap-2 mb-3 border-b border-slate-700 pb-2">
+                        <i class="fas fa-book-reader text-accent"></i>
+                        <h3 class="font-head text-2xl tracking-wide">BEDAH VIDEO</h3>
+                    </div>
+                    <div id="mission-theory" class="text-sm space-y-4 font-light text-slate-200 leading-relaxed">
+                        <!-- JS Injected -->
+                    </div>
+                </div>
+
+                <!-- 3. CHECKLIST MISI (Tugas Praktik) -->
+                <div class="bg-white p-5 rounded-2xl shadow-sm border-l-4 border-accent" id="practice-section">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-stopwatch text-accent text-xl"></i>
+                            <div>
+                                <h3 class="font-head text-2xl font-bold text-brand leading-none">MISI LATIHAN</h3>
+                                <p class="text-[10px] text-slate-400">Ikuti Video</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] bg-accent/10 text-accent px-2 py-1 rounded font-bold">PRAKTIK</span>
+                    </div>
+                    <div id="task-container" class="space-y-3">
+                        <!-- JS Injected Tasks -->
+                    </div>
+                </div>
+
+                <!-- 4. P5 Check (Karakter) -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200" id="p5-section">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i class="fas fa-medal text-brand"></i>
+                        <h3 class="font-head text-xl font-bold text-brand">KARAKTER (P5)</h3>
+                    </div>
+                    <div id="p5-container" class="grid grid-cols-1 gap-2"></div>
+                </div>
+
+                <!-- 5. Kuis -->
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200" id="quiz-section">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 bg-action/10 text-action rounded flex items-center justify-center font-bold"><i class="fas fa-brain"></i></div>
+                        <h3 class="font-head text-2xl font-bold text-brand leading-none">UJI KOMPETENSI (10 Soal)</h3>
+                    </div>
+                    <div id="quiz-area" class="space-y-4"></div>
+                </div>
+
+                <!-- 6. Story -->
+                <div class="bg-gradient-to-br from-indigo-50 to-blue-50 p-5 rounded-2xl border border-blue-100 shadow-inner">
+                    <label class="flex items-center gap-2 font-bold text-brand text-lg uppercase mb-2">
+                        <i class="fas fa-comment-dots text-action"></i> Catatan Latihan
+                    </label>
+                    <textarea id="catatan" class="w-full h-24 bg-white p-4 rounded-xl border border-blue-200 text-sm focus:border-action outline-none resize-none transition-all shadow-sm" placeholder="Gerakan kombinasi mana yang paling susah diikuti?"></textarea>
+                </div>
+
+            </div>
+
+            <!-- Floating Button -->
+            <div class="absolute bottom-0 w-full bg-white/90 backdrop-blur-md p-4 border-t border-slate-200 shadow-[0_-5px_20px_rgba(0,0,0,0.05)] z-40">
+                <button onclick="kirimWA()" class="w-full bg-green-600 hover:bg-green-700 text-white font-head text-xl py-3 rounded-xl shadow-lg transition-transform active:scale-[0.98] flex items-center justify-between px-6 group">
+                    <span class="text-green-100 text-xs font-sans font-bold tracking-widest uppercase">Misi Selesai?</span>
+                    <div class="flex items-center gap-2">
+                        <span>KIRIM LAPORAN</span>
+                        <i class="fab fa-whatsapp text-2xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // DATA MATERI SESUAI VIDEO & MODUL
+        const missions = {
+            1: {
+                title: "TEKNIK DASAR PARSIAL",
+                // Video start 0s (Awal)
+                videoId: 'pPxBcuEZ2OY',
+                start: 0, 
+                desc: "Fokus pada penguasaan gerakan secara terpisah: <strong>Kaki (00:00-12:30)</strong> dan <strong>Tangan (12:32-16:10)</strong>.",
+                theory: `
+                    <div class="grid grid-cols-1 gap-2">
+                         <div class="bg-slate-800/50 p-2 rounded border border-slate-600">
+                            <strong class="text-accent text-xs uppercase mb-1 block">A. Gerak Kaki (Video 00:00-12:30)</strong>
+                            <ul class="list-disc pl-4 text-xs mt-1 text-slate-300 space-y-1">
+                                <li><strong>Marching:</strong> Jalan di tempat.</li>
+                                <li><strong>Single/Double Step:</strong> Langkah samping.</li>
+                                <li><strong>V-Step:</strong> Langkah segitiga.</li>
+                                <li><strong>Heel Touch & Toe Touch:</strong> Sentuhan tumit/ujung kaki.</li>
+                                <li><strong>Lunge:</strong> Kaki ke belakang/samping.</li>
+                                <li><strong>Knee Up & Leg Curl:</strong> Angkat lutut & tekuk kaki belakang.</li>
+                                <li><strong>Squat:</strong> Menekuk lutut (Jongkok).</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/50 p-2 rounded border border-slate-600">
+                            <strong class="text-action text-xs uppercase mb-1 block">B. Gerak Tangan (Video 12:32-16:10)</strong>
+                            <ul class="list-disc pl-4 text-xs mt-1 text-slate-300 space-y-1">
+                                <li><strong>Bicep Curl:</strong> Tekuk siku.</li>
+                                <li><strong>Upright Row:</strong> Tarik ke dagu.</li>
+                                <li><strong>Chest Press:</strong> Dorong depan dada.</li>
+                                <li><strong>Butterfly:</strong> Buka tutup lengan.</li>
+                                <li><strong>Open Hand & Over Hand:</strong> Buka samping & Dorong atas.</li>
+                                <li><strong>Flex Ex & Pumping:</strong> Tekuk lurus & Pompa.</li>
+                            </ul>
+                        </div>
+                    </div>`,
+                tasks: [
+                    "Simak Video: Segmen Gerak Kaki (sampai menit 12:30).",
+                    "Praktik Kaki: Lakukan Marching, V-Step, dan Knee Up (5 menit).",
+                    "Simak Video: Segmen Gerak Tangan (menit 12:32-16:10).",
+                    "Praktik Tangan: Lakukan Bicep Curl, Butterfly, dan Open Hand (5 menit)."
+                ],
+                p5: [
+                    {icon: "fa-book", label: "Bernalar Kritis", desc: "Saya mengidentifikasi jenis gerakan di video."},
+                    {icon: "fa-bolt", label: "Disiplin", desc: "Saya mengikuti instruksi video dengan tepat."}
+                ],
+                quiz: [
+                    {q: "Gerakan jalan di tempat dengan mengangkat paha setinggi pinggul disebut...", opt: ["Jogging", "Knee Up", "Marching", "Skipping", "Lunge"], ans: 2},
+                    {q: "Gerakan melangkah dua kali ke samping kanan dan kiri disebut...", opt: ["Single Step", "Double Step", "V-Step", "Touch Step", "Walk"], ans: 1},
+                    {q: "Posisi awal tangan di samping, lalu diangkat menekuk di depan dada (Siku tinggi) disebut...", opt: ["Open Hand", "Up Pro / Upright Row", "Over Hand", "Butterfly", "Open Up"], ans: 1},
+                    {q: "Gerakan kaki membentuk segitiga (maju lebar, mundur rapat) adalah...", opt: ["V-Step", "A-Step", "Mambo", "Squat", "Lunge"], ans: 0},
+                    {q: "Gerakan membuka dan menutup lengan di depan wajah/dada disebut...", opt: ["Chest Press", "Butterfly", "Bicep Curl", "Pumping", "Rowing"], ans: 1},
+                    {q: "Gerakan mendorong kedua lengan lurus ke atas disebut...", opt: ["Chest Press", "Upright Row", "Over Hand / Overhead", "Tricep Ext", "Curl"], ans: 2},
+                    {q: "Gerakan menekuk kaki ke arah bokong (belakang) disebut...", opt: ["Knee Up", "Leg Curl", "Squat", "Lunge", "Kick"], ans: 1},
+                    {q: "Single Lunge adalah gerakan memindahkan kaki ke...", opt: ["Depan", "Belakang/Samping dengan menekuk lutut", "Atas", "Bawah", "Putar"], ans: 1},
+                    {q: "Saat melakukan Squat, posisi lutut...", opt: ["Lurus kaku", "Ditekuk seperti duduk", "Menempel tanah", "Disilangkan", "Ke belakang"], ans: 1},
+                    {q: "Gerakan mendayung kedua lengan disebut...", opt: ["Swimming", "Rowing", "Fishing", "Pumping", "Driving"], ans: 1}
+                ]
+            },
+            2: {
+                title: "VARIASI & KOMBINASI",
+                // Video start 972s (16:12)
+                videoId: 'pPxBcuEZ2OY',
+                start: 972, 
+                desc: "Fokus pada <strong>KOORDINASI</strong>. Menonton dan meniru gerakan kombinasi Kaki + Tangan (Video menit 16:12 - Selesai).",
+                theory: `
+                    <div class="space-y-4">
+                        <div class="bg-slate-800 p-3 rounded border-l-4 border-accent">
+                            <h4 class="font-bold text-white mb-1">A. Konsep Kombinasi (Video)</h4>
+                            <p class="text-xs text-slate-300 text-justify">
+                                Pada menit 16:12, video menunjukkan penggabungan gerakan.
+                                <br><strong>Kunci Sukses:</strong> Koordinasi otak kiri-kanan. Kaki bergerak sesuai pola lantai, tangan bergerak sesuai pola ayunan.
+                            </p>
+                        </div>
+                        <div class="bg-slate-800 p-3 rounded border-l-4 border-action">
+                            <h4 class="font-bold text-white mb-1">B. Contoh Variasi Joget Komando</h4>
+                            <ul class="list-disc pl-4 text-xs text-slate-300">
+                                <li><strong>Power:</strong> Gerakan dilakukan lebih tegas dan patah-patah dibanding senam biasa.</li>
+                                <li><strong>Formasi:</strong> Barisan rapi ala PBB.</li>
+                                <li><strong>Kombinasi:</strong> Jalan di tempat (Marching) + Tangan Mengepal/Tegas.</li>
+                            </ul>
+                        </div>
+                    </div>
+                `,
+                tasks: [
+                    "Simak Video: Segmen Kombinasi (Mulai menit 16:12).",
+                    "Analisis: Perhatikan bagaimana kaki dan tangan bergerak bersamaan.",
+                    "Praktik 1: Tiru kombinasi V-Step + Butterfly dari video.",
+                    "Praktik 2: Tiru kombinasi Double Step + Chest Press.",
+                    "Tantangan: Lakukan dengan gaya tegas (Joget Komando)."
+                ],
+                p5: [
+                    {icon: "fa-brain", label: "Bernalar Kritis", desc: "Saya menganalisis kombinasi gerak di video."},
+                    {icon: "fa-bolt", label: "Tangguh", desc: "Saya mencoba berulang kali hingga koordinasi lancar."}
+                ],
+                quiz: [
+                    {q: "Kombinasi gerak 'Over Hand dan V-Step' berarti...", opt: ["Tangan dorong atas & Kaki segitiga", "Tangan menutup & Kaki lurus", "Tangan diam & Kaki lari", "Tangan tinju & Kaki diam", "Semua salah"], ans: 0},
+                    {q: "Tujuan utama latihan variasi dan kombinasi adalah melatih...", opt: ["Kekuatan otot", "Koordinasi gerak", "Kecepatan lari", "Tinggi lompatan", "Teriakan"], ans: 1},
+                    {q: "Gambar kombinasi 'Chest Press dan Double Step' berarti...", opt: ["Tangan dorong depan & 2 langkah samping", "Tangan atas & lari", "Tangan bawah & diam", "Kaki silang & tangan diam", "Bebas"], ans: 0},
+                    {q: "Ciri khas gerakan variasi Joget Komando adalah...", opt: ["Lemah gemulai", "Tegas, Kaku, Patah-patah", "Lambat", "Tidur", "Duduk"], ans: 1},
+                    {q: "Kesulitan utama dalam melakukan gerakan kombinasi adalah...", opt: ["Menghafal nama", "Sinkronisasi tangan dan kaki", "Memilih baju", "Mencari teman", "Minum air"], ans: 1},
+                    {q: "Gerakan kombinasi sebaiknya diawali dari penguasaan...", opt: ["Gerakan tangan dulu", "Gerakan kaki dulu (Footwork)", "Langsung bersamaan", "Lompat-lompat", "Teriak"], ans: 1},
+                    {q: "Agar gerakan kombinasi terlihat rapi, pandangan mata harus...", opt: ["Ke bawah lihat kaki", "Lurus ke depan", "Ke atas", "Tutup mata", "Ke belakang"], ans: 1},
+                    {q: "Variasi gerak bertujuan agar...", opt: ["Cepat lelah", "Pembelajaran tidak monoton", "Susah dilakukan", "Siswa bingung", "Guru senang"], ans: 1},
+                    {q: "Saat melakukan kombinasi, napas sebaiknya...", opt: ["Ditahan", "Diatur dengan ritme teratur", "Ditiup kencang", "Tahan napas sekuatnya", "Bebas"], ans: 1},
+                    {q: "Salah satu indikator keberhasilan gerakan kombinasi adalah...", opt: ["Bergerak cepat", "Bergerak on beat (sesuai ketukan)", "Bergerak lambat", "Bergerak acak", "Bergerak sendiri"], ans: 1}
+                ]
+            },
+            3: {
+                title: "PROYEK KREASI",
+                // Video full reference
+                videoId: 'pPxBcuEZ2OY',
+                start: 0, 
+                desc: "Ujian Praktik: Merancang dan menampilkan rangkaian gerak senam irama kelompok.",
+                theory: `
+                    <div class="bg-slate-800 p-3 rounded border-l-4 border-green-500 text-xs">
+                        <strong class="text-white text-sm block mb-2">TARGET PROYEK</strong>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-300">
+                            <li><strong>Rangkaian:</strong> Buat koreografi 4x8 hitungan.</li>
+                            <li><strong>Sumber Gerak:</strong> Ambil gerakan dari Tab 1 & 2 (Video).</li>
+                            <li><strong>Formasi:</strong> Wajib ada perubahan pola lantai (Transisi).</li>
+                        </ul>
+                        <strong class="text-white text-sm block mt-3 mb-1">KRITERIA PENILAIAN</strong>
+                        <p class="text-slate-400">Teknik Gerak (Sesuai Video), Kekompakan, Kreativitas Formasi, & Power.</p>
+                    </div>`,
+                tasks: [
+                    "<strong>Perencanaan:</strong> Pilih 4 gerakan kombinasi dari video.",
+                    "<strong>Latihan:</strong> Hafalkan urutan gerak bersama kelompok.",
+                    "<strong>Formasi:</strong> Tentukan siapa di depan/belakang dan kapan berpindah.",
+                    "<strong>Show Time:</strong> Tampilkan di depan kelas.",
+                    "<strong>Evaluasi:</strong> Apa kekurangan penampilan tadi?"
+                ],
+                p5: [
+                    {icon: "fa-users", label: "Gotong Royong", desc: "Saya aktif berdiskusi dengan kelompok."},
+                    {icon: "fa-lightbulb", label: "Kreatif", desc: "Saya menyumbang ide formasi barisan."}
+                ],
+                quiz: [
+                    {q: "Sistematika latihan senam irama yang benar adalah...", opt: ["Inti - Pemanasan - Pendinginan", "Pendinginan - Inti - Pemanasan", "Pemanasan - Inti - Pendinginan", "Inti saja", "Bebas"], ans: 2},
+                    {q: "Fase latihan yang bertujuan menaikkan suhu tubuh adalah...", opt: ["Cooling Down", "Inti", "Warming Up", "Relaxation", "Sleeping"], ans: 2},
+                    {q: "Gerakan inti (Core) biasanya dilakukan dengan intensitas...", opt: ["Sangat Rendah", "Rendah", "Sedang ke Tinggi", "Nol", "Tidur"], ans: 2},
+                    {q: "Manfaat utama pendinginan adalah...", opt: ["Menaikkan nadi", "Menurunkan denyut nadi & buang asam laktat", "Membuat otot tegang", "Agar berkeringat", "Bikin lapar"], ans: 1},
+                    {q: "Unsur penilaian 'Kekompakan' dalam senam kelompok melihat...", opt: ["Kecantikan wajah", "Mahalnya kostum", "Keselarasan gerak antar anggota", "Kecepatan lari", "Tinggi badan"], ans: 2},
+                    {q: "Berapa hitungan standar dalam satu blok gerakan senam?", opt: ["10 hitungan", "8 hitungan", "5 hitungan", "12 hitungan", "6 hitungan"], ans: 1},
+                    {q: "Musik senam irama sebaiknya memiliki...", opt: ["Tempo acak", "Beat/Ketukan stabil", "Suara pelan", "Lirik sedih", "Hening"], ans: 1},
+                    {q: "Jika lupa gerakan saat tampil, sebaiknya...", opt: ["Berhenti total", "Marah", "Tetap bergerak mengikuti teman (improvisasi)", "Keluar barisan", "Nangis"], ans: 2},
+                    {q: "Tujuan aktivitas gerak berirama adalah...", opt: ["Meningkatkan berat badan", "Meningkatkan kebugaran jantung & paru", "Pusing", "Cedera", "Bosan"], ans: 1},
+                    {q: "Transisi antar gerakan sebaiknya...", opt: ["Terputus-putus", "Mengalir lancar (Kontinu)", "Berhenti lama", "Kaku", "Acak"], ans: 1}
+                ]
+            }
+        };
+
+        let activeMission = 1;
+        let score = 0;
+
+        // --- INIT & NAV ---
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if(document.getElementById('nama').value) {
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+                document.getElementById('main-content').classList.add('flex');
+                loadMission(1);
+            }
+        });
+
+        function loadMission(id) {
+            activeMission = id;
+            const data = missions[id];
+            
+            // Tab UI update
+            [1,2,3].forEach(i => {
+                const btn = document.getElementById(`btn-${i}`);
+                if(i === id) { btn.classList.add('active-mission'); btn.classList.remove('inactive-mission'); }
+                else { btn.classList.remove('active-mission'); btn.classList.add('inactive-mission'); }
+            });
+
+            // Content update
+            document.getElementById('mission-title').innerText = data.title;
+            
+            // Inject Iframe with Start Time
+            const mediaContainer = document.getElementById('media-container');
+            // Construct YouTube Embed URL with Start Time
+            const src = `https://www.youtube.com/embed/${data.videoId}?start=${data.start}&rel=0`;
+            mediaContainer.innerHTML = `<iframe class="w-full h-full" src="${src}" frameborder="0" allowfullscreen></iframe>`;
+            
+            document.getElementById('mission-desc').innerHTML = data.desc;
+            document.getElementById('mission-theory').innerHTML = data.theory;
+
+            // Render Tasks
+            const taskDiv = document.getElementById('task-container');
+            taskDiv.innerHTML = '';
+            data.tasks.forEach((t) => {
+                taskDiv.innerHTML += `
+                <label class="relative flex items-center cursor-pointer group">
+                    <input type="checkbox" class="task-checkbox peer sr-only">
+                    <div class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-3 flex items-start gap-3 transition-all hover:border-action peer-checked:shadow-sm">
+                        <div class="mt-0.5 w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center bg-white peer-checked:bg-green-500 peer-checked:border-green-500 transition-all shrink-0">
+                            <i class="fas fa-check text-white text-xs opacity-0 icon-check transition-all"></i>
+                        </div>
+                        <span class="text-sm text-slate-600 font-medium select-none leading-snug">${t}</span>
+                    </div>
+                </label>`;
+            });
+
+            // Render P5
+            const p5Div = document.getElementById('p5-container');
+            const p5Sec = document.getElementById('p5-section');
+            p5Div.innerHTML = '';
+            
+            if(data.p5.length === 0) {
+                p5Sec.classList.add('hidden');
+            } else {
+                p5Sec.classList.remove('hidden');
+                data.p5.forEach(p => {
+                    p5Div.innerHTML += `
+                    <label class="block relative cursor-pointer">
+                        <input type="checkbox" class="peer sr-only">
+                        <div class="bg-white border border-slate-200 p-3 rounded-xl flex items-center gap-3 hover:bg-slate-50 peer-checked:bg-blue-50 peer-checked:border-blue-300 transition-all">
+                            <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 peer-checked:bg-blue-500 peer-checked:text-white transition-all shrink-0">
+                                <i class="fas ${p.icon}"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-slate-700 text-sm peer-checked:text-blue-800">${p.label}</p>
+                                <p class="text-xs text-slate-500 leading-tight">${p.desc}</p>
+                            </div>
+                            <div class="ml-auto opacity-0 peer-checked:opacity-100 text-blue-500"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                    </label>`;
+                });
+            }
+
+            // Render Quiz
+            const quizDiv = document.getElementById('quiz-area');
+            quizDiv.innerHTML = '';
+            score = 0;
+            const letters = ['A','B','C','D','E'];
+            
+            data.quiz.forEach((q, idx) => {
+                let opts = '';
+                q.opt.forEach((o, oIdx) => {
+                    opts += `
+                    <button onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.ans})" class="q-btn-${idx} w-full text-left text-sm p-3 rounded-lg border border-slate-200 mb-2 hover:bg-slate-50 transition-all option-btn flex items-start gap-2 group">
+                        <span class="font-bold text-slate-400 min-w-[20px] group-hover:text-action">${letters[oIdx]}.</span>
+                        <span class="text-slate-700 font-medium">${o}</span>
+                    </button>`;
+                });
+                quizDiv.innerHTML += `
+                    <div class="border-b border-slate-100 pb-4 mb-2 last:border-0">
+                        <p class="font-bold text-sm text-brand mb-3"><span class="bg-brand text-white px-2 py-0.5 rounded text-xs mr-2">No. ${idx+1}</span> ${q.q}</p>
+                        ${opts}
+                        <div id="fb-${idx}" class="hidden text-xs font-bold mt-2 p-2 rounded animate-pulse"></div>
+                    </div>`;
+            });
+
+            document.getElementById('scroll-container').scrollTop = 0;
+        }
+
+        function checkAnswer(btn, qIdx, oIdx, ansIdx) {
+            const btns = document.querySelectorAll(`.q-btn-${qIdx}`);
+            btns.forEach(b => { b.disabled = true; b.classList.add('opacity-50', 'cursor-not-allowed'); });
+            
+            const fb = document.getElementById(`fb-${qIdx}`);
+            fb.classList.remove('hidden');
+
+            if(oIdx === ansIdx) {
+                btn.classList.remove('opacity-50');
+                btn.classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+                fb.innerHTML = "<i class='fas fa-check'></i> Benar! (+10)";
+                fb.classList.add('bg-green-100', 'text-green-700');
+                score += 10;
+            } else {
+                btn.classList.remove('opacity-50');
+                btn.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+                btns[ansIdx].classList.remove('opacity-50');
+                btns[ansIdx].classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+                fb.innerHTML = "<i class='fas fa-times'></i> Salah.";
+                fb.classList.add('bg-red-100', 'text-red-700');
+            }
+        }
+
+        function kirimWA() {
+            const nama = document.getElementById('nama').value;
+            const kelas = document.getElementById('kelas').value;
+            const absen = document.getElementById('absen').value;
+            const story = document.getElementById('catatan').value || "Lancar jaya!";
+            
+            const tasksChecked = document.querySelectorAll('.task-checkbox:checked').length;
+            const tasksTotal = document.querySelectorAll('.task-checkbox').length;
+            
+            const p5Checked = [];
+            document.querySelectorAll('#p5-container input:checked').forEach(inp => {
+                 p5Checked.push(inp.nextElementSibling.querySelector('p').innerText);
+            });
+            const p5String = p5Checked.length > 0 ? p5Checked.join(", ") : "-";
+
+            const text = `*LAPORAN KD 3.7 (SENAM)* 🤸\n` +
+                         `--------------------------\n` +
+                         `👤 Nama: ${nama}\n` +
+                         `🏫 Kelas: ${kelas} (${absen})\n` +
+                         `📅 Materi: ${missions[activeMission].title}\n` +
+                         `--------------------------\n` +
+                         `✅ *Progress:* ${tasksChecked}/${tasksTotal} Item Selesai\n` +
+                         `⭐ *Karakter:* ${p5String}\n` +
+                         `💬 *Story:* "${story}"\n` +
+                         `🏆 *Nilai Kuis:* ${score}/100\n` +
+                         `--------------------------\n` +
+                         `_Dikirim via App_`;
+            
+            window.open(`https://wa.me/6285709808532?text=${encodeURIComponent(text)}`);
+        }
+    </script>
+</body>
+</html>
+
+
