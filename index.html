@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aktivitas Gerak Berirama</title>
+    <title>PJOK: Rhythmic Ultimate</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -53,13 +53,13 @@
             <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fas fa-running text-9xl text-white"></i></div>
             <div class="relative z-10">
                 <span class="bg-accent text-white px-3 py-0.5 rounded text-xs font-bold tracking-widest uppercase shadow-sm">Modul Lengkap Fase E</span>
-                <h1 class="font-head text-4xl font-bold uppercase leading-none mt-2 tracking-wide">Aktivitas Gerak <span class="text-accent">Berirama</span></h1>
+                <h1 class="font-head text-4xl font-bold uppercase leading-none mt-2 tracking-wide">Rhythmic <span class="text-accent">Project</span></h1>
                 
                 <div class="flex items-center gap-3 mt-4 pt-3 border-t border-slate-700/50">
                     <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-accent text-lg shadow-inner"><i class="fas fa-user-tie"></i></div>
                     <div>
                         <p class="text-[10px] text-slate-400 uppercase tracking-wider">Guru Pengampu</p>
-                        <p class="font-bold text-white text-sm leading-none">M Nanda S.N., S.Kom.</p>
+                        <p class="font-bold text-white text-lg leading-none">M. Nanda S.N., S.Kom.</p>
                     </div>
                 </div>
             </div>
@@ -74,13 +74,21 @@
                 <form id="login-form" class="space-y-4">
                     <input type="text" id="nama" class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:border-accent font-bold outline-none" placeholder="Nama Lengkap" required>
                     <div class="grid grid-cols-2 gap-3">
-                        <select id="kelas" class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 font-bold outline-none"><option>X TKJ</option><option>X TKR</option><option>X TBSM</option></select>
+                        <select id="kelas" class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 font-bold outline-none">
+                            <option>X TKJ A</option>
+                            <option>X TKJ B</option>
+                            <option>X TBSM</option>
+                        </select>
                         <input type="number" id="absen" class="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 font-bold outline-none" placeholder="No. Absen" required>
                     </div>
                     <button type="submit" class="w-full bg-brand text-white font-head text-2xl py-3 rounded-xl hover:bg-slate-800 transition-all shadow-lg mt-4 flex items-center justify-center gap-2">
                         Masuk Kelas <i class="fas fa-arrow-right text-accent"></i>
                     </button>
                 </form>
+            </div>
+            <!-- Copyright -->
+            <div class="text-center mt-8 text-slate-400 text-xs">
+                &copy; NxyxA 2026
             </div>
         </section>
 
@@ -95,7 +103,7 @@
                 </button>
                 <button onclick="loadMission(2)" id="btn-2" class="flex-1 min-w-[90px] py-2 px-2 rounded-lg text-center transition-all inactive-tab group">
                     <span class="block text-[8px] font-bold text-slate-400 uppercase tracking-wider group-hover:text-accent">Tab 2</span>
-                    <span class="font-head text-lg leading-none">TANGAN & MIX</span>
+                    <span class="font-head text-lg leading-none">20 TANGAN</span>
                 </button>
                 <button onclick="loadMission(3)" id="btn-3" class="flex-1 min-w-[90px] py-2 px-2 rounded-lg text-center transition-all inactive-tab group">
                     <span class="block text-[8px] font-bold text-slate-400 uppercase tracking-wider group-hover:text-accent">Tab 3</span>
@@ -173,8 +181,8 @@
                     <textarea id="catatan" class="w-full h-24 bg-white p-4 rounded-xl border border-blue-200 text-sm focus:border-action outline-none resize-none transition-all shadow-sm" placeholder="Tuliskan pengalaman latihanmu hari ini..."></textarea>
                 </div>
 
-                <!-- Footer Copyright -->
-                <div class="text-center text-[10px] text-slate-400 mt-6 font-bold uppercase tracking-widest">
+                <!-- Copyright -->
+                <div class="text-center text-slate-400 text-[10px] pt-4 pb-2">
                     &copy; NxyxA 2026
                 </div>
 
@@ -202,81 +210,75 @@
                 desc: "Pembahasan Teori Lengkap & Drill 20 Macam Langkah Kaki (Video 00:00 - 12:30).",
                 theory: `
                     <div class="space-y-6">
-                        <!-- BAGIAN TEORI -->
                         <div class="bg-slate-800 p-4 rounded border-l-4 border-accent">
                             <h4 class="font-bold text-white mb-2 text-lg">A. Konsep Gerak Berirama</h4>
                             <p class="text-xs text-slate-300 text-justify mb-2">
-                                <strong>Definisi:</strong> Aktivitas gerak yang dilakukan dengan iringan musik, tepukan, atau hitungan. Tujuannya mengembangkan kebugaran jasmani (aerobik) dan kemampuan seni gerak.
+                                <strong>Definisi:</strong> Aktivitas gerak yang dilakukan dengan iringan musik untuk mengembangkan kebugaran jasmani (aerobik).
                             </p>
                             <p class="text-xs text-slate-300"><strong>3 Tekanan Utama:</strong></p>
                             <ul class="list-disc pl-4 text-xs text-slate-300 mb-2">
                                 <li><strong>Irama (Rhythm):</strong> Kesesuaian gerak dengan beat.</li>
-                                <li><strong>Kelentukan (Flexibility):</strong> Luas gerak sendi & elastisitas otot.</li>
+                                <li><strong>Kelentukan (Flexibility):</strong> Luas gerak sendi.</li>
                                 <li><strong>Kontinuitas (Continuity):</strong> Rangkaian gerak tidak terputus.</li>
                             </ul>
-                            <p class="text-xs text-slate-300"><strong>Manfaat:</strong> Meningkatkan daya tahan jantung (kardio), membakar lemak, koordinasi, dan mengurangi stres.</p>
                         </div>
 
-                        <!-- BAGIAN FOOTWORK LENGKAP -->
                         <div class="bg-slate-800 p-4 rounded border-l-4 border-action">
                             <h4 class="font-bold text-white mb-2 text-lg">B. Macam Langkah Kaki (Footwork)</h4>
                             <div class="grid grid-cols-1 gap-2 text-xs text-slate-300">
                                 <p class="font-bold text-accent">--- DI TEMPAT (LOW IMPACT) ---</p>
-                                <p><strong>1. Marching:</strong> Jalan di tempat, paha angkat rata air.</p>
-                                <p><strong>2. Single Step:</strong> Melangkah 1 kali ke samping kanan/kiri.</p>
-                                <p><strong>3. Double Step:</strong> Melangkah 2 kali ke samping kanan/kiri.</p>
-                                <p><strong>4. Heel Touch:</strong> Menyentuhkan tumit ke lantai di depan badan.</p>
-                                <p><strong>5. Toe Touch:</strong> Menyentuhkan ujung kaki ke depan atau belakang.</p>
-                                <p><strong>6. Single Lunge:</strong> Memindahkan kaki ke samping/belakang, lutut ditekuk.</p>
-                                <p><strong>7. Double Lunge:</strong> Lunge 2 kali berturut-turut di sisi yang sama.</p>
-                                <p><strong>8. Squat:</strong> Membuka kaki lebar, menekuk kedua lutut seperti duduk.</p>
-                                <p><strong>9. Knee Up:</strong> Mengangkat lutut tinggi minimal setinggi pinggang.</p>
-                                <p><strong>10. Leg Curl:</strong> Menekuk kaki ke arah bokong (belakang).</p>
+                                <p><strong>1. Marching:</strong> Jalan di tempat.</p>
+                                <p><strong>2. Single Step:</strong> Melangkah 1 kali ke samping.</p>
+                                <p><strong>3. Double Step:</strong> Melangkah 2 kali ke samping.</p>
+                                <p><strong>4. Heel Touch:</strong> Tumit sentuh depan.</p>
+                                <p><strong>5. Toe Touch:</strong> Ujung kaki sentuh depan/belakang.</p>
+                                <p><strong>6. Single Lunge:</strong> Kaki ke belakang/samping, lutut tekuk.</p>
+                                <p><strong>7. Double Lunge:</strong> Lunge 2 kali di sisi yang sama.</p>
+                                <p><strong>8. Squat:</strong> Jongkok (tekuk lutut).</p>
+                                <p><strong>9. Knee Up:</strong> Angkat lutut tinggi.</p>
+                                <p><strong>10. Leg Curl:</strong> Tekuk kaki ke belakang (bokong).</p>
                                 
                                 <p class="font-bold text-accent mt-2">--- BERPINDAH (MOVING) ---</p>
-                                <p><strong>11. V-Step (Easy Walk):</strong> Langkah segitiga (Maju lebar, mundur rapat).</p>
-                                <p><strong>12. Mambo:</strong> Langkah kaki depan-kembali, belakang-kembali.</p>
-                                <p><strong>13. Forwards & Backwards:</strong> Berjalan/langkah maju dan mundur (biasanya 4 hitungan).</p>
-                                <p><strong>14. Cha Cha Cha:</strong> Langkah cepat ritmis (hitungan 1, 2, 3-dan-4).</p>
-                                <p><strong>15. Diagonal:</strong> Melangkah serong ke pojok depan.</p>
+                                <p><strong>11. V-Step (Easy Walk):</strong> Langkah segitiga.</p>
+                                <p><strong>12. Mambo:</strong> Langkah depan-kembali, belakang-kembali.</p>
+                                <p><strong>13. Forwards & Backwards:</strong> Maju mundur.</p>
+                                <p><strong>14. Cha Cha Cha:</strong> Langkah cepat ritmis.</p>
+                                <p><strong>15. Diagonal:</strong> Melangkah serong.</p>
 
                                 <p class="font-bold text-accent mt-2">--- LOMPATAN (HIGH IMPACT) ---</p>
-                                <p><strong>16. Jumping Jack:</strong> Melompat membuka dan menutup kaki dan tangan.</p>
-                                <p><strong>17. Skip:</strong> Gerakan seperti kuda-kudaan/lompat kecil kaki bergantian.</p>
-                                <p><strong>18. High Knee:</strong> Lari di tempat dengan lutut diangkat tinggi.</p>
-                                <p><strong>19. Jogging:</strong> Lari kecil di tempat atau keliling (High Impact).</p>
+                                <p><strong>16. Jumping Jack:</strong> Lompat buka tutup.</p>
+                                <p><strong>17. Skip:</strong> Kuda-kudaan.</p>
+                                <p><strong>18. Jogging:</strong> Lari kecil.</p>
                             </div>
                         </div>
                     </div>`,
                 tasks: [
                     "Melakukan Pemanasan (5 Menit).",
-                    "Praktik Low Impact: Marching, Single/Double Step, V-Step, Mambo.",
-                    "Praktik Variasi: Lunges, Heel/Toe Touch, Diagonal, Cha Cha Cha.",
-                    "Praktik High Impact: Jogging, Jumping Jack, Knee Up, Skip.",
-                    "Melakukan semua gerakan masing-masing 2x8 hitungan."
+                    "Praktik Low Impact: Marching, Single/Double Step, V-Step.",
+                    "Praktik Variasi: Knee Up, Leg Curl, Heel Touch.",
+                    "Praktik High Impact: Jogging, Jumping Jack (1 Menit)."
                 ],
                 p5: [
-                    {icon: "fa-book", label: "Bernalar Kritis", desc: "Memahami dan menghafal 19 jenis langkah kaki."},
-                    {icon: "fa-bolt", label: "Tangguh", desc: "Melakukan gerakan High Impact tanpa mudah menyerah."}
+                    {icon: "fa-book", label: "Bernalar Kritis", desc: "Menghafal urutan langkah kaki."},
+                    {icon: "fa-bolt", label: "Tangguh", desc: "Melakukan gerakan tanpa mudah menyerah."}
                 ],
                 quiz: [
                     {q: "Gerakan jalan di tempat dengan mengangkat paha setinggi pinggul disebut...", opt: ["Jogging", "Knee Up", "Marching", "Skipping", "Lunge"], ans: 2},
                     {q: "Gerakan melangkah dua kali ke samping kanan dan kiri disebut...", opt: ["Single Step", "Double Step", "V-Step", "Touch Step", "Walk"], ans: 1},
-                    {q: "Tiga tekanan utama dalam senam irama adalah...", opt: ["Kekuatan, Kecepatan, Kelincahan", "Irama, Kelentukan, Kontinuitas", "Musik, Kostum, Gaya", "Lari, Lompat, Lempar", "Keseimbangan, Power, Speed"], ans: 1},
                     {q: "Gerakan kaki membentuk huruf V atau segitiga disebut...", opt: ["A-Step", "V-Step", "Z-Step", "Mambo", "Pivot"], ans: 1},
                     {q: "Memindahkan kaki ke belakang dengan menekuk lutut disebut...", opt: ["Lunge Back", "Marching", "Kick", "Jump", "Hop"], ans: 0},
                     {q: "Gerakan melompat membuka dan menutup kaki sambil tepuk tangan disebut...", opt: ["Jogging", "Jumping Jack", "Skipping", "Hop", "Leap"], ans: 1},
                     {q: "Langkah ritmis cepat dengan hitungan 'cha-cha-cha' disebut...", opt: ["Mambo", "Samba", "Cha Cha Cha", "Salsa", "Tango"], ans: 2},
                     {q: "Jogging termasuk dalam kategori gerakan...", opt: ["Low Impact", "High Impact", "Non Impact", "Sleeping", "Sitting"], ans: 1},
-                    {q: "Gerakan memindahkan berat badan ke depan lalu kembali ke tempat (seperti berdansa) disebut...", opt: ["Mambo", "V-Step", "Marching", "Squat", "Lunge"], ans: 0},
-                    {q: "Gerakan 'Diagonal' berarti melangkah ke arah...", opt: ["Depan lurus", "Samping lurus", "Serong/Menyudut", "Belakang lurus", "Putar"], ans: 2}
+                    {q: "Gerakan memindahkan berat badan ke depan lalu kembali ke tempat disebut...", opt: ["Mambo", "V-Step", "Marching", "Squat", "Lunge"], ans: 0},
+                    {q: "Gerakan 'Diagonal' berarti melangkah ke arah...", opt: ["Depan lurus", "Samping lurus", "Serong/Menyudut", "Belakang lurus", "Putar"], ans: 2},
+                    {q: "Gerakan menekuk kaki ke arah bokong (belakang) disebut...", opt: ["Knee Up", "Leg Curl", "Squat", "Lunge", "Kick"], ans: 1}
                 ]
             },
             2: {
-                title: "TANGAN & KOMBINASI",
-                // Video baru untuk Tab 2
-                videoId: 'UReuuVqc97o', start: 0,
-                desc: "Drill 20 Macam Gerakan Tangan (Arm Movement) dan Kombinasi (Ikuti Video).",
+                title: "20 GERAKAN TANGAN",
+                videoId: 'pPxBcuEZ2OY', start: 752,
+                desc: "Drill 20 Macam Gerakan Tangan (Arm Movement) dan Kombinasi.",
                 theory: `
                     <div class="space-y-4">
                         <div class="bg-slate-800 p-4 rounded border-l-4 border-accent">
@@ -308,7 +310,6 @@
                             <h4 class="font-bold text-white mb-2 text-lg">B. Prinsip Kombinasi</h4>
                             <p class="text-xs text-slate-300 text-justify">
                                 Penggabungan gerak kaki (Tab 1) dan tangan secara bersamaan. Kuncinya adalah <strong>Koordinasi</strong>.
-                                <br><em>Contoh:</em> V-Step (Kaki) + Butterfly (Tangan).
                             </p>
                         </div>
                     </div>`,
@@ -322,7 +323,7 @@
                 ],
                 p5: [
                     {icon: "fa-brain", label: "Bernalar Kritis", desc: "Menghafal 20 nama gerakan tangan."},
-                    {icon: "fa-users", label: "Gotong Royong", desc: "Berlatih bersama teman untuk melihat kesalahan."}
+                    {icon: "fa-users", label: "Gotong Royong", desc: "Berlatih bersama teman."}
                 ],
                 quiz: [
                     {q: "Gerakan menekuk siku ke arah bahu disebut...", opt: ["Bicep Curl", "Tricep Ext", "Rowing", "Press", "Fly"], ans: 0},
@@ -339,13 +340,197 @@
             },
             3: {
                 title: "PROYEK: KAKA MAIN SALAH",
-                // Video Senam Kaka Main Salah Viral (Baru)
                 videoId: 'od3zaejZmsc', start: 0,
                 desc: "<strong>PROJECT 1:</strong> Hafalkan dan praktikkan senam kreasi gabungan dengan lagu 'Kaka Main Salah'.",
                 theory: `
                     <div class="bg-slate-800 p-4 rounded border-l-4 border-green-500">
                         <h4 class="font-bold text-white mb-2 text-lg">Panduan Proyek Gabungan</h4>
                         <ul class="list-decimal pl-4 text-xs text-slate-300 space-y-1">
-                            <li><strong>
+                            <li><strong>Musik:</strong> Lagu 'Kaka Main Salah'.</li>
+                            <li><strong>Konsep:</strong> Gerakan gabungan kaki dan tangan yang ceria.</li>
+                            <li><strong>Fokus:</strong> Ikuti gerakan instruktur dalam video. Perhatikan transisi dan kekompakan.</li>
+                            <li><strong>Tugas:</strong> Tonton video referensi di atas, hafalkan urutan gerakannya, dan lakukan bersama kelompok/sendiri.</li>
+                        </ul>
+                    </div>`,
+                tasks: [
+                    "Menonton video referensi sampai habis.",
+                    "Menghafal gerakan Pemanasan/Intro.",
+                    "Menghafal gerakan Inti (Kombinasi).",
+                    "Latihan dengan musik asli.",
+                    "Merekam video hasil latihan (Durasi min. 1 menit)."
+                ],
+                p5: [
+                    {icon: "fa-star", label: "Kreatif", desc: "Mengekspresikan diri melalui tarian."},
+                    {icon: "fa-smile", label: "Gembira", desc: "Melakukan aktivitas dengan perasaan senang."}
+                ],
+                quiz: [
+                    {q: "Lagu 'Kaka Main Salah' sering digunakan untuk jenis senam...", opt: ["Senam Lantai", "Senam Kreasi / Komando", "Yoga", "Pilates", "Balet"], ans: 1},
+                    {q: "Ciri khas gerakan dalam video panduan Kaka Main Salah adalah...", opt: ["Lambat dan sedih", "Energik, Ceria, dan Kompak", "Diam di tempat", "Gerakan akrobatik sulit", "Hanya gerakan tangan"], ans: 1},
+                    {q: "Apa yang harus diperhatikan agar terlihat bagus saat menari?", opt: ["Wajah cemberut", "Gerakan asal-asalan", "Power dan Ekspresi Wajah", "Baju mahal", "Sepatu baru"], ans: 2},
+                    {q: "Jika dilakukan berkelompok, kunci utamanya adalah...", opt: ["Siapa paling cepat", "Kekompakan/Keserempakan", "Siapa paling tinggi", "Siapa paling teriak", "Saling dorong"], ans: 1},
+                    {q: "Gerakan kombinasi dalam video melatih...", opt: ["Keseimbangan & Koordinasi", "Kekuatan otot leher", "Kecepatan lari", "Daya tahan paru", "Kelenturan jari"], ans: 0},
+                    {q: "Tempo lagu Kaka Main Salah termasuk...", opt: ["Slow (Lambat)", "Upbeat (Cepat & Semangat)", "Hening", "Sangat cepat sekali (Hardcore)", "Tidak beraturan"], ans: 1},
+                    {q: "Dalam video referensi, gerakan biasanya dimulai dengan...", opt: ["Pendinginan", "Pemanasan/Intro", "Tidur", "Lari", "Makan"], ans: 1},
+                    {q: "Tujuan proyek ini adalah...", opt: ["Menghafal lagu", "Melatih keberanian tampil & kebugaran", "Menjadi artis", "Supaya viral", "Mengisi waktu luang"], ans: 1},
+                    {q: "Saat melakukan gerakan memutar badan, tumpuan kaki harus...", opt: ["Kuat dan stabil", "Jinjit terus", "Satu kaki diangkat", "Sambil lompat", "Duduk"], ans: 0},
+                    {q: "Setelah melakukan senam ini dengan semangat, denyut nadi akan...", opt: ["Turun drastis", "Tetap", "Meningkat (Zona Aerobik)", "Berhenti", "Hilang"], ans: 2}
+                ]
+            },
+            4: {
+                title: "PROYEK: VIDEO BEBAS",
+                videoId: 't62wgRqMaHA', start: 0,
+                desc: "<strong>PROJECT 2 (FINAL):</strong> Buat video senam kreasimu sendiri (Bebas).",
+                theory: `
+                    <div class="bg-slate-800 p-4 rounded border-l-4 border-purple-500">
+                        <h4 class="font-bold text-white mb-2 text-lg">Instruksi Tugas Akhir</h4>
+                        <ul class="list-decimal pl-4 text-xs text-slate-300 space-y-2">
+                            <li><strong>Konsep:</strong> Buat rangkaian senam irama minimal 3 menit.</li>
+                            <li><strong>Musik:</strong> BEBAS (Pilih lagu favoritmu yang beat-nya jelas). Boleh Dangdut, Pop, K-Pop, EDM, dll.</li>
+                            <li><strong>Gerakan:</strong> Wajib memasukkan minimal 5 gerakan kaki (Tab 1) dan 3 gerakan tangan (Tab 2).</li>
+                            <li><strong>Kriteria Video:</strong>
+                                <br>- Wajah terlihat jelas.
+                                <br>- Menggunakan pakaian olahraga.
+                                <br>- Video tidak putus-putus (One take lebih baik).
+                            </li>
+                        </ul>
+                    </div>`,
+                tasks: [
+                    "Memilih lagu favorit (Min. 3 menit).",
+                    "Merancang gerakan (Tulis di kertas: Intro-Inti-Ending).",
+                    "Latihan mandiri/kelompok.",
+                    "Perekaman video (Take Video).",
+                    "Edit video sederhana (tambah nama/kelas)."
+                ],
+                p5: [
+                    {icon: "fa-video", label: "Literasi Digital", desc: "Mampu merekam dan mengedit video sederhana."},
+                    {icon: "fa-lightbulb", label: "Kreatif Mandiri", desc: "Menciptakan karya orisinal."}
+                ],
+                quiz: [
+                    {q: "Durasi minimal untuk tugas video bebas adalah...", opt: ["30 detik", "1 menit", "3 menit", "10 menit", "1 jam"], ans: 2},
+                    {q: "Syarat musik untuk senam kreasi bebas adalah...", opt: ["Harus lagu sedih", "Harus lagu nasional", "Bebas asalkan beat/ketukan jelas", "Tanpa musik", "Harus lagu barat"], ans: 2},
+                    {q: "Pakaian yang wajib digunakan dalam video adalah...", opt: ["Seragam sekolah putih abu", "Pakaian Olahraga/Training", "Piyama", "Jeans", "Batik"], ans: 1},
+                    {q: "Dalam menyusun gerakan, kita harus memasukkan unsur dari...", opt: ["Tab 1 (Kaki) & Tab 2 (Tangan)", "Gerakan silat", "Gerakan tari tradisional saja", "Gerakan tidur", "Gerakan makan"], ans: 0},
+                    {q: "Agar video terlihat bagus, pencahayaan sebaiknya...", opt: ["Gelap gulita", "Terang dan jelas", "Remang-remang", "Backlight (Membelakangi cahaya)", "Warna-warni"], ans: 1},
+                    {q: "Tahap pertama dalam membuat proyek video adalah...", opt: ["Langsung rekam", "Perencanaan (Pilih lagu & susun gerak)", "Edit video", "Upload", "Tidur"], ans: 1},
+                    {q: "Kreativitas dalam tugas ini dinilai dari...", opt: ["Mahalnya kamera", "Variasi gerakan dan kesesuaian dengan musik", "Banyaknya like", "Mahalnya baju", "Lokasi syuting di luar negeri"], ans: 1},
+                    {q: "Jika merekam menggunakan HP, posisi terbaik adalah...", opt: ["Potrait (Tegak)", "Landscape (Mendatar)", "Miring", "Terbalik", "Goyang-goyang"], ans: 1},
+                    {q: "Salah satu unsur penilaian sikap dalam tugas ini adalah...", opt: ["Kecepatan mengumpulkan", "Tanggung jawab & Kejujuran (Karya sendiri)", "Mahalnya kuota", "Bagusnya HP", "Bantuan orang tua"], ans: 1},
+                    {q: "Video hasil rekaman sebaiknya dicek ulang untuk memastikan...", opt: ["Suara musik masuk & gerakan terlihat", "Baterai penuh", "Memori penuh", "Layar pecah", "Sinyal kuat"], ans: 0}
+                ]
+            }
+        };
+
+        let activeTab = 1;
+        let score = 0;
+
+        // --- INIT ---
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if(document.getElementById('nama').value) {
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+                document.getElementById('main-content').classList.add('flex');
+                loadMission(1);
+            }
+        });
+
+        function loadMission(id) {
+            activeTab = id;
+            const data = missions[id];
+            
+            // Tab UI
+            for(let i=1; i<=4; i++) {
+                const btn = document.getElementById(`btn-${i}`);
+                if(i === id) { btn.classList.add('active-tab'); btn.classList.remove('inactive-tab'); }
+                else { btn.classList.remove('active-tab'); btn.classList.add('inactive-tab'); }
+            }
+
+            // Content
+            document.getElementById('mission-title').innerText = data.title;
+            const media = document.getElementById('media-container');
+            // Using YouTube Embed with Start Time
+            media.innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${data.videoId}?start=${data.start}&rel=0" frameborder="0" allowfullscreen></iframe>`;
+            
+            document.getElementById('mission-desc').innerHTML = data.desc;
+            document.getElementById('mission-theory').innerHTML = data.theory;
+
+            // Checklist
+            const taskDiv = document.getElementById('task-container');
+            taskDiv.innerHTML = '';
+            data.tasks.forEach(t => {
+                taskDiv.innerHTML += `
+                <label class="relative flex items-center cursor-pointer group">
+                    <input type="checkbox" class="task-checkbox peer sr-only">
+                    <div class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-3 flex items-start gap-3 transition-all hover:border-action peer-checked:shadow-sm">
+                        <div class="mt-0.5 w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center bg-white peer-checked:bg-green-500 peer-checked:border-green-500 transition-all shrink-0">
+                            <i class="fas fa-check text-white text-xs opacity-0 icon-check transition-all"></i>
+                        </div>
+                        <span class="text-xs text-slate-600 font-medium select-none leading-snug">${t}</span>
+                    </div>
+                </label>`;
+            });
+
+            // P5
+            const p5Div = document.getElementById('p5-container');
+            p5Div.innerHTML = '';
+            data.p5.forEach(p => {
+                p5Div.innerHTML += `
+                <label class="block relative cursor-pointer">
+                    <input type="checkbox" class="peer sr-only">
+                    <div class="bg-white border border-slate-200 p-3 rounded-xl flex items-center gap-3 hover:bg-slate-50 peer-checked:bg-blue-50 peer-checked:border-blue-300 transition-all">
+                        <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 peer-checked:bg-blue-500 peer-checked:text-white shrink-0"><i class="fas ${p.icon}"></i></div>
+                        <div><p class="font-bold text-slate-700 text-xs peer-checked:text-blue-800">${p.label}</p><p class="text-[10px] text-slate-500">${p.desc}</p></div>
+                    </div>
+                </label>`;
+            });
+
+            // Quiz
+            const quizDiv = document.getElementById('quiz-area');
+            quizDiv.innerHTML = '';
+            score = 0;
+            const letters = ['A','B','C','D','E'];
+            data.quiz.forEach((q, idx) => {
+                let opts = '';
+                q.opt.forEach((o, oIdx) => {
+                    opts += `<button onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.ans})" class="q-btn-${idx} w-full text-left text-xs p-2 rounded border border-slate-200 mb-1 hover:bg-slate-50 flex gap-2"><span class="font-bold text-slate-400 w-4">${letters[oIdx]}.</span><span>${o}</span></button>`;
+                });
+                quizDiv.innerHTML += `<div class="border-b border-slate-100 pb-3 mb-2"><p class="font-bold text-xs text-brand mb-2">${idx+1}. ${q.q}</p>${opts}<div id="fb-${idx}" class="hidden text-xs font-bold mt-1"></div></div>`;
+            });
+
+            document.getElementById('scroll-container').scrollTop = 0;
+        }
+
+        function checkAnswer(btn, qIdx, oIdx, ansIdx) {
+            const btns = document.querySelectorAll(`.q-btn-${qIdx}`);
+            btns.forEach(b => { b.disabled = true; b.classList.add('opacity-50'); });
+            const fb = document.getElementById(`fb-${qIdx}`);
+            fb.classList.remove('hidden');
+            if(oIdx === ansIdx) {
+                btn.classList.remove('opacity-50'); btn.classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+                fb.innerHTML = "BENAR! (+10)"; fb.classList.add('text-green-600'); score += 10;
+            } else {
+                btn.classList.remove('opacity-50'); btn.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+                fb.innerHTML = "SALAH."; fb.classList.add('text-red-600');
+            }
+        }
+
+        function kirimWA() {
+            const nama = document.getElementById('nama').value;
+            const kelas = document.getElementById('kelas').value;
+            const absen = document.getElementById('absen').value;
+            const note = document.getElementById('catatan').value || "-";
+            const tasks = document.querySelectorAll('.task-checkbox:checked').length;
+            
+            const text = `*LAPORAN TAB ${activeTab} (${missions[activeTab].title})* 🤸\n` +
+                         `👤 ${nama} | ${kelas} (${absen})\n` +
+                         `✅ Ceklis: ${tasks} Item\n` +
+                         `🏆 Skor: ${score}\n` +
+                         `📝 Catatan: ${note}\n` +
+                         `_Dikirim via App_`;
+            window.open(`https://wa.me/6285709808532?text=${encodeURIComponent(text)}`);
+        }
+    </script>
+</body>
+</html>
 
 
